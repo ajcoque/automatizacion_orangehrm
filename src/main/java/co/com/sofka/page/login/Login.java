@@ -30,7 +30,7 @@ public class Login extends CommonActionsOnPages {
 
         super(driver, secondsForExplicitWait);
 
-        if(loginModel == null)
+        if (loginModel == null)
             LOGGER.warn(MODEL_NULL_MESSAGE);
 
         this.loginModel = loginModel;
@@ -38,18 +38,9 @@ public class Login extends CommonActionsOnPages {
     }
 
     //Page functions.
-    /*public void fillLoginForm() throws IOException {
-        clear(username);
-        typeInto(username, loginModel.getUsername());
 
-        clear(password);
-        typeInto(password, loginModel.getPassword());
-
-        doSubmit(login);
-    }*/
-
-    public void fillLoginForm(){
-        try{
+    public void fillLoginForm() {
+        try {
             scrollTo(username);
             withExplicitWaitClear(username);
             withExplicitWaitTypeInto(username, loginModel.getUsername());
@@ -61,16 +52,16 @@ public class Login extends CommonActionsOnPages {
             scrollTo(login);
             clickOn(login);
 
-        } catch (Exception exception){
+        } catch (Exception exception) {
             LOGGER.warn(exception.getMessage());
         }
     }
 
-    public String isLoginDone(){
+    public String isLoginDone() {
         return getText(assertionLoginSuccess).trim();
     }
 
-    public String isLoginFail(){
+    public String isLoginFail() {
         return getText(assertionLoginInvalid).trim();
     }
 }

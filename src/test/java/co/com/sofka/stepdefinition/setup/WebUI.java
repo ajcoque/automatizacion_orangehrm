@@ -39,7 +39,4 @@ public class WebUI {
         driver.quit();
     }
 
-    protected String getURL(){
-        return driver.getCurrentUrl();
-    }
 }

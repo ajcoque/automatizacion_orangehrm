@@ -2,6 +2,7 @@ package co.com.sofka.page.common;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
@@ -139,6 +140,13 @@ public class CommonActionsOnPages {
     public void withExplicitWaitClickOn(By locator) {
         webDriverExplicitWait.until(presenceOfElementLocated(locator)).click();
     }
+
+    public void actionMove(By opcion) {
+        Actions builder = new Actions(driver);
+        WebElement element = driver.findElement(opcion);
+        builder.moveToElement(element).build().perform();
+    }
+
 
     public boolean isDisplayed(By locator) throws NoSuchElementException {
         return driver.findElement(locator).isDisplayed();

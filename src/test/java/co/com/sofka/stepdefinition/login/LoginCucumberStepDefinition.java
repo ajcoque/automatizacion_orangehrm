@@ -2,6 +2,7 @@ package co.com.sofka.stepdefinition.login;
 
 import co.com.sofka.model.login.LoginModel;
 import co.com.sofka.page.login.Login;
+import co.com.sofka.stepdefinition.common.LoginSuccess;
 import co.com.sofka.stepdefinition.setup.WebUI;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,6 +17,7 @@ public class LoginCucumberStepDefinition extends WebUI {
     private static final Logger LOGGER = Logger.getLogger(LoginCucumberStepDefinition.class);
     private LoginModel loginModel;
     private Login login;
+    private LoginSuccess loginSuccess;
 
     private static final String ASSERTION_EXCEPTION_MESSAGE = "El aplicativo no redirige a la pagina esperada";
     private static final String ASSERTION_EXCEPTION_MESSAGE_INVALID_CREDENTIALS = "No se muestra el mensaje Invalid credentials";
@@ -28,9 +30,9 @@ public class LoginCucumberStepDefinition extends WebUI {
     //Background:
     @Given("el administrador del sistema se encuentra en la pagina de inicio de sesion")
     public void elAdministradorDelSistemaSeEncuentraEnLaPaginaDeInicioDeSesion() {
-        try{
+        try {
             generalSetUp();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
@@ -40,16 +42,10 @@ public class LoginCucumberStepDefinition extends WebUI {
 
     @When("el administrador ingresa los campos username y password obligatorios y solicita login")
     public void elAdministradorIngresaLosCamposUsernameYPasswordObligatoriosYSolicitaLogin() {
-        try {
-            dataConfigurationSuccess();
-            login = new Login(driver, loginModel, TEN_SECONDS.getValue());
-            login.fillLoginForm();
-        } catch (Exception exception){
-            quitDriver();
-            LOGGER.error(exception.getMessage(), exception);
-            Assertions.fail(exception.getMessage());
-        }
+        loginSuccess = new LoginSuccess();
+        login = loginSuccess.successLogin(driver);
     }
+
     @Then("el sistema debera rederigir a la pagina dashboard del aplicativo web")
     public void elSistemaDeberaRederigirAlaPaginaDashboardDelAplicativoWeb() {
         try {
@@ -59,13 +55,12 @@ public class LoginCucumberStepDefinition extends WebUI {
                     ASSERTION_EXCEPTION_MESSAGE
             );
             quitDriver();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
         }
     }
-
 
 
     @When("el administrador ingresa el campo username valido pero password invalido y solicita login")
@@ -74,12 +69,13 @@ public class LoginCucumberStepDefinition extends WebUI {
             dataConfigurationPasswordInvalid();
             login = new Login(driver, loginModel, TEN_SECONDS.getValue());
             login.fillLoginForm();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
         }
     }
+
     @Then("el sistema deberá mostrar un mensaje evidenciando que los datos ingresados son invalidos")
     public void elSistemaDeberáMostrarUnMensajeEvidenciandoQueLosDatosIngresadosSonInvalidos() {
         try {
@@ -89,13 +85,12 @@ public class LoginCucumberStepDefinition extends WebUI {
                     ASSERTION_EXCEPTION_MESSAGE_INVALID_CREDENTIALS
             );
             quitDriver();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
         }
     }
-
 
 
     @When("el administrador ingresa el campo username invalido y password valido y solicita login")
@@ -104,12 +99,13 @@ public class LoginCucumberStepDefinition extends WebUI {
             dataConfigurationUsernameInvalid();
             login = new Login(driver, loginModel, TEN_SECONDS.getValue());
             login.fillLoginForm();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
         }
     }
+
     @Then("el sistema deberá mostrar un mensaje que indique que los datos ingresados son invalidos")
     public void elSistemaDeberáMostrarUnMensajeQueIndiqueQueLosDatosIngresadosSonInvalidos() {
         try {
@@ -119,7 +115,7 @@ public class LoginCucumberStepDefinition extends WebUI {
                     ASSERTION_EXCEPTION_MESSAGE_INVALID_CREDENTIALS
             );
             quitDriver();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
@@ -133,12 +129,13 @@ public class LoginCucumberStepDefinition extends WebUI {
             dataConfigurationEmpty();
             login = new Login(driver, loginModel, TEN_SECONDS.getValue());
             login.fillLoginForm();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
         }
     }
+
     @Then("el sistema deberá mostrar un mensaje evidenciando que los campos no deben estar vacios")
     public void elSistemaDeberáMostrarUnMensajeEvidenciandoQueLosCamposNoDebenEstarVacios() {
         try {
@@ -148,46 +145,41 @@ public class LoginCucumberStepDefinition extends WebUI {
                     ASSERTION_EXCEPTION_MESSAGE_EMPTY_CREDENTIALS
             );
             quitDriver();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             quitDriver();
             LOGGER.error(exception.getMessage(), exception);
             Assertions.fail(exception.getMessage());
         }
     }
 
-    private void dataConfigurationSuccess(){
-        loginModel = new LoginModel();
-        loginModel.setUsername("admin");
-        loginModel.setPassword("admin123");
-    }
 
-    private void dataConfigurationUsernameInvalid(){
+    private void dataConfigurationUsernameInvalid() {
         loginModel = new LoginModel();
         loginModel.setUsername("admin123");
         loginModel.setPassword("admin123");
     }
 
-    private void dataConfigurationPasswordInvalid(){
+    private void dataConfigurationPasswordInvalid() {
         loginModel = new LoginModel();
         loginModel.setUsername("admin");
         loginModel.setPassword("123");
     }
 
-    private void dataConfigurationEmpty(){
+    private void dataConfigurationEmpty() {
         loginModel = new LoginModel();
         loginModel.setUsername("");
         loginModel.setPassword("");
     }
 
-    private String expectedSuccessLogin(){
+    private String expectedSuccessLogin() {
         return ASSERTION_TITLE_PAG;
     }
 
-    private String expectedFailedLogin(){
+    private String expectedFailedLogin() {
         return ASSERTION_INVALID_DATA;
     }
 
-    private String expectedEmptyData(){
+    private String expectedEmptyData() {
         return ASSERTION_EMPTY_DATA;
     }
 
