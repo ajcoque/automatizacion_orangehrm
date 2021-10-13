@@ -21,7 +21,7 @@ dependencies {
     implementation 'com.sikulix:sikulixapi:2.0.5'
 
 
-    implementation 'io.cucumber:cucumber-java8:6.11.0'
+    //implementation 'io.cucumber:cucumber-java8:6.11.0'
     implementation 'io.cucumber:cucumber-junit:6.11.0'
 
     implementation 'io.cucumber:cucumber-java:6.11.0'
