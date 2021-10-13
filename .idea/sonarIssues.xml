@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="$PROJECT_DIR$/../automationtesting-trunkParte3/automationtesting-trunk/toolsqapom/src/main/java/co/com/sofka/util/Log4jValues.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../automationtesting-trunkParte3/automationtesting-trunk/toolsqapom/src/test/java/co/com/sofka/stepdefinition/practiceform/opt1/PracticeFormCucumberOpt1StepDefinition.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
