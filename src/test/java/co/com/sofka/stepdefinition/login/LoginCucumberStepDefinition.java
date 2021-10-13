@@ -39,7 +39,6 @@ public class LoginCucumberStepDefinition extends WebUI {
         }
     }
 
-
     @When("el administrador ingresa los campos username y password obligatorios y solicita login")
     public void elAdministradorIngresaLosCamposUsernameYPasswordObligatoriosYSolicitaLogin() {
         loginSuccess = new LoginSuccess();
@@ -50,7 +49,7 @@ public class LoginCucumberStepDefinition extends WebUI {
     public void elSistemaDeberaRederigirAlaPaginaDashboardDelAplicativoWeb() {
         try {
             Assertions.assertEquals(
-                    expectedSuccessLogin(),
+                    ASSERTION_TITLE_PAG,
                     login.isLoginDone(),
                     ASSERTION_EXCEPTION_MESSAGE
             );
@@ -61,7 +60,6 @@ public class LoginCucumberStepDefinition extends WebUI {
             Assertions.fail(exception.getMessage());
         }
     }
-
 
     @When("el administrador ingresa el campo username valido pero password invalido y solicita login")
     public void elAdministradorIngresaElCampoUsernameValidoPeroPasswordInvalidoYSolicitaLogin() {
@@ -80,7 +78,7 @@ public class LoginCucumberStepDefinition extends WebUI {
     public void elSistemaDeberáMostrarUnMensajeEvidenciandoQueLosDatosIngresadosSonInvalidos() {
         try {
             Assertions.assertEquals(
-                    expectedFailedLogin(),
+                    ASSERTION_INVALID_DATA,
                     login.isLoginFail(),
                     ASSERTION_EXCEPTION_MESSAGE_INVALID_CREDENTIALS
             );
@@ -91,7 +89,6 @@ public class LoginCucumberStepDefinition extends WebUI {
             Assertions.fail(exception.getMessage());
         }
     }
-
 
     @When("el administrador ingresa el campo username invalido y password valido y solicita login")
     public void elAdministradorIngresaElCampoUsernameInvalidoYPasswordValidoYSolicitaLogin() {
@@ -110,7 +107,7 @@ public class LoginCucumberStepDefinition extends WebUI {
     public void elSistemaDeberáMostrarUnMensajeQueIndiqueQueLosDatosIngresadosSonInvalidos() {
         try {
             Assertions.assertEquals(
-                    expectedFailedLogin(),
+                    ASSERTION_INVALID_DATA,
                     login.isLoginFail(),
                     ASSERTION_EXCEPTION_MESSAGE_INVALID_CREDENTIALS
             );
@@ -121,7 +118,6 @@ public class LoginCucumberStepDefinition extends WebUI {
             Assertions.fail(exception.getMessage());
         }
     }
-
 
     @When("el administrador no ingresa el campo username ni el campo password y solicita login")
     public void elAdministradorNoIngresaElCampoUsernameYNiElCampoPasswordYSolicitaLogin() {
@@ -140,7 +136,7 @@ public class LoginCucumberStepDefinition extends WebUI {
     public void elSistemaDeberáMostrarUnMensajeEvidenciandoQueLosCamposNoDebenEstarVacios() {
         try {
             Assertions.assertEquals(
-                    expectedEmptyData(),
+                    ASSERTION_EMPTY_DATA,
                     login.isLoginFail(),
                     ASSERTION_EXCEPTION_MESSAGE_EMPTY_CREDENTIALS
             );
@@ -151,7 +147,6 @@ public class LoginCucumberStepDefinition extends WebUI {
             Assertions.fail(exception.getMessage());
         }
     }
-
 
     private void dataConfigurationUsernameInvalid() {
         loginModel = new LoginModel();
@@ -170,18 +165,5 @@ public class LoginCucumberStepDefinition extends WebUI {
         loginModel.setUsername("");
         loginModel.setPassword("");
     }
-
-    private String expectedSuccessLogin() {
-        return ASSERTION_TITLE_PAG;
-    }
-
-    private String expectedFailedLogin() {
-        return ASSERTION_INVALID_DATA;
-    }
-
-    private String expectedEmptyData() {
-        return ASSERTION_EMPTY_DATA;
-    }
-
 
 }

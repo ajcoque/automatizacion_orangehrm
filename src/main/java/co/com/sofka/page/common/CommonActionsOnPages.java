@@ -147,7 +147,6 @@ public class CommonActionsOnPages {
         builder.moveToElement(element).build().perform();
     }
 
-
     public boolean isDisplayed(By locator) throws NoSuchElementException {
         return driver.findElement(locator).isDisplayed();
     }

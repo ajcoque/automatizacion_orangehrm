@@ -2,8 +2,6 @@ package co.com.sofka.stepdefinition.users;
 
 import co.com.sofka.model.admin.usermanagement.users.UserModel;
 
-import co.com.sofka.model.login.LoginModel;
-import co.com.sofka.page.login.Login;
 import co.com.sofka.page.users.Users;
 import co.com.sofka.stepdefinition.common.LoginSuccess;
 import co.com.sofka.stepdefinition.setup.WebUI;
@@ -74,6 +72,5 @@ public class UsersCucumberStepDefinition extends WebUI {
     private String expectedSuccessSearch(){
         return userModel.getUsername();
     }
-
 
 }

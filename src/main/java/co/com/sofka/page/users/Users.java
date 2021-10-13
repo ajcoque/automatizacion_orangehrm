@@ -22,7 +22,6 @@ public class Users extends CommonActionsOnPages {
     private final By username = By.id("searchSystemUser_userName");
     private final By search = By.id("searchBtn");
 
-
     //For Assertions test case.
     private final By assertionUsername = By.xpath("//*[@id=\"resultTable\"]/tbody/tr[1]/td[2]/a");
 
@@ -62,7 +61,6 @@ public class Users extends CommonActionsOnPages {
             LOGGER.warn(exception.getMessage());
         }
     }
-
 
     public void getSection() {
 
